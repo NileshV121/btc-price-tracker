@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { GET_API_ACTION } from '../api/apiActions';
 import { getApiCall } from '../api/api';
 
-function* manageResponse(response) {
+function manageResponse(response) {
   return {
     ...response
   };

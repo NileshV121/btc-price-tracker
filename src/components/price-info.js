@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchBtcPriceAction } from '../actions/fetchBtcPrice';
+import { updateDefaultCurrency } from '../actions/updateBtcInfo';
+import { calcualteBtc} from '../actions/calculateBtc';
 
 class PriceInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount: '',
-      currency: ''
+      amount: ''
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({currency: event.target.value});
+  handleInputChange(event) {
+    this.setState({amount: event.target.value});
+  }
+
+  handleCurrencyChange(event) {
+    this.props.updateDefaultCurrency(event.target.value);
   }
 
   handleSubmit(event) {
-    alert(this.state.value);
+    this.props.calcualteBtc({ currency: this.props.defaultCurrency, amount: this.state.amount})
     event.preventDefault();
   }
 
@@ -42,15 +48,16 @@ class PriceInfo extends Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Name:
-            <input type="text" name="amount" value={this.state.amount} onChange={this.handleChange} />
+            <input type="text" name="amount" value={this.state.amount} onChange={this.handleInputChange} />
           </label>
-          <select value={this.state.currency} onChange={this.handleChange}>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option selected value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
+          <select value={this.state.currency} onChange={this.handleCurrencyChange}>
+            {
+              this.props.currencies.map( (value, index) =>
+                <option key={index} value={value}>{value}</option>
+              )
+            }
           </select>
-          <input type="submit" value="Submit" />
+          <input type="button" onClick={this.handleSubmit} value="check" />
         </form>
       </div>
     )
@@ -65,7 +72,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchBtcPrice: params => dispatch(fetchBtcPriceAction(params))
+  fetchBtcPrice: params => dispatch(fetchBtcPriceAction(params)),
+  updateDefaultCurrency: params => dispatch(updateDefaultCurrency(params)),
+  calcualteBtc: params => dispatch(calcualteBtc(params))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PriceInfo);

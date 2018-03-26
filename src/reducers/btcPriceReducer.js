@@ -1,4 +1,4 @@
-import { UPDATE_BTC_PRICE, UPDATE_BTC_CURRENCIES } from '../actions/updateBtcInfo';
+import { UPDATE_BTC_PRICE, UPDATE_BTC_CURRENCIES, UPDATE_DEFAULT_CURRENCY } from '../actions/updateBtcInfo';
 
 const initialState = {
   currentBtcPrice: '',
@@ -17,6 +17,11 @@ export const btcPrice = (state = initialState, action) => {
     return {
       ...state,
       currencies: action.currencies,
+    };
+    case UPDATE_DEFAULT_CURRENCY:
+    return {
+      ...state,
+      defaultCurrency: action.currency
     };
     default:
       return state;

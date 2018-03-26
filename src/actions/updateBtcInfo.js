@@ -1,4 +1,4 @@
-import { call, put, takeEvery, select } from 'redux-saga/effects';
+import { put, takeEvery, select } from 'redux-saga/effects';
 import { GET_BTC_PRICE_SUCCESS } from './fetchBtcPrice';
 
 export const UPDATE_BTC_PRICE = "UPDATE_BTC_PRICE";
@@ -12,4 +12,22 @@ function* updateBtcInfo(action){
 
 export function* watchGetBtcPriceApi() {
   yield takeEvery(GET_BTC_PRICE_SUCCESS, updateBtcInfo);
+}
+
+
+export const UPDATE_DEFAULT_CURRENCY = "UPDATE_DEFAULT_CURRENCY";
+
+export const updateDefaultCurrency = (currency) => ({
+  type: UPDATE_DEFAULT_CURRENCY,
+  currency
+});
+
+function* updateBtcPrice(){
+  const defaultCurrency = yield select( (state) => state.btcPrice.defaultCurrency)
+  const btcPrice = yield select( (state) => state.btcInfo.info[defaultCurrency].last)
+  yield put({ type: UPDATE_BTC_PRICE, price: btcPrice })
+}
+
+export function* watchUpdateDefaultCurrency() {
+  yield takeEvery(UPDATE_DEFAULT_CURRENCY, updateBtcPrice);
 }
