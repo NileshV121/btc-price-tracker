@@ -1,32 +1,36 @@
 import {
-  GET_BTC_PRICE,
+  GET_BTC_PRICE_REQUEST,
   GET_BTC_PRICE_SUCCESS,
   GET_BTC_PRICE_FAILURE,
-} from '../actions/fetch-btc-price';
+} from '../actions/btc-api';
 
-const initialState = {
-  isGettingBtcPrice: false,
-  info: [],
+
+export const initialState = {
+  isLoading: false,
+  info: {},
 };
 
 export const btcInfo = (state = initialState, action) => {
   switch (action.type) {
-    case GET_BTC_PRICE:
+    case GET_BTC_PRICE_REQUEST:
       return {
         ...state,
-        isGettingBtcPrice: true,
+        isLoading: true,
       };
+
     case GET_BTC_PRICE_SUCCESS:
       return {
         ...state,
-        isGettingBtcPrice: false,
+        isLoading: false,
         info: action.data,
       };
+
     case GET_BTC_PRICE_FAILURE:
       return {
         ...state,
-        isGettingBtcPrice: false,
+        isLoading: false,
       };
+
     default:
       return state;
   }

@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 
 import AppBar from '../components/app-bar';
 import store from '../store';
-import runRootSaga from '../sagas/root-saga';
+import runSaga from '../sagas/root-saga';
 
-runRootSaga();
+runSaga();
 
 const MainContainer = props => (
   <Provider store={store}>

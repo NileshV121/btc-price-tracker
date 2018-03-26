@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
-import { btcInfo } from './btc-info-reducer';
-import { btcPrice } from './/btc-price-reducer';
+import { btcInfo } from './btc-info';
+import { btcPrice } from './/btc-price';
+
 
 const reducers = {
-  btcInfo: btcInfo,
-  btcPrice: btcPrice
-}
+  btcInfo,
+  btcPrice,
+};
 
 const appReducer = combineReducers(reducers);
 

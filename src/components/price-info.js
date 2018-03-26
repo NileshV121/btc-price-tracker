@@ -1,35 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBtcPriceAction } from '../actions/fetch-btc-price';
-import { updateDefaultCurrency } from '../actions/update-btc-info';
-import { calcualteBtc} from '../actions/calculate-btc';
+
+import { fetchBtcPriceAction } from '../actions/btc-api';
+import { updateSelectedCurrency, calcualteBtc, updateBtcInputTerm } from '../actions/btc-info';
 
 class PriceInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      amount: '',
-      btcCalculated: ''
-    };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleInputChange(event) {
-    this.setState({amount: event.target.value});
-  }
-
-  handleCurrencyChange(event) {
-    this.props.updateDefaultCurrency(event.target.value);
-  }
-
-  handleSubmit(event) {
-    // this.setState({btcCalculated: this.state.amount/this.props.currentBtcPrice})
-    this.props.calcualteBtc({ currency: this.props.defaultCurrency, amount: this.state.amount})
-    event.preventDefault();
-  }
 
   componentDidMount() {
     this.props.fetchBtcPrice();
@@ -39,32 +14,46 @@ class PriceInfo extends Component {
   }
 
   render() {
+    const {
+      currencies,
+      inputTerm,
+      calcualteBtc,
+      currentBtcPrice,
+      selectedCurrency,
+      calculatedBtcPrice,
+      updateBtcInputTerm,
+      updateSelectedCurrency,
+    } = this.props;
+
     return (
       <div>
         <div>
-          <span>Current Btc Price: {this.props.currentBtcPrice}</span>
+          <span>Current Btc Price: {currentBtcPrice}</span>
         </div>
         <div>
-          <span>Default Currency: {this.props.defaultCurrency}</span>
+          <span>Default Currency: {selectedCurrency}</span>
         </div>
         <div>
-          <span>Calcualted Btc Price: {this.state.btcCalculated}</span>
+          <span>Calcualted Btc Price: {calculatedBtcPrice}</span>
         </div>
         <form onSubmit={this.handleSubmit}>
           <label>
             Name:
-            <input type="text" name="amount" value={this.state.amount} onChange={this.handleInputChange} />
+            <input
+              type="text"
+              name="amount"
+              value={inputTerm}
+              onChange={e => updateBtcInputTerm(e.target.value)}
+            />
           </label>
           <label htmlFor="firstname">Currency:
-            <select value={this.state.currency} onChange={this.handleCurrencyChange}>
-              {
-                this.props.currencies.map( (value, index) =>
-                  <option key={index} value={value}>{value}</option>
-                )
-              }
+            <select onChange={e => updateSelectedCurrency(e.target.value)}>
+              {currencies.map((value, index) =>
+                <option key={index} value={value}>{value}</option>
+              )}
             </select>
           </label>
-          <input type="button" onClick={this.handleSubmit} value="check" />
+          <input type="button" onClick={() => calcualteBtc(inputTerm)} value="check" />
         </form>
       </div>
     )
@@ -74,14 +63,17 @@ class PriceInfo extends Component {
 const mapStateToProps = state => ({
   btcPriceInfo: state.btcInfo.info,
   currentBtcPrice: state.btcPrice.currentBtcPrice,
+  calculatedBtcPrice: state.btcPrice.calculatedBtcPrice,
   currencies: state.btcPrice.currencies,
-  defaultCurrency: state.btcPrice.defaultCurrency
+  selectedCurrency: state.btcPrice.selectedCurrency,
+  inputTerm: state.btcPrice.inputTerm,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchBtcPrice: params => dispatch(fetchBtcPriceAction(params)),
-  updateDefaultCurrency: params => dispatch(updateDefaultCurrency(params)),
-  calcualteBtc: params => dispatch(calcualteBtc(params))
+  fetchBtcPrice: () => dispatch(fetchBtcPriceAction()),
+  updateSelectedCurrency: currency => dispatch(updateSelectedCurrency(currency)),
+  calcualteBtc: heldBtc => dispatch(calcualteBtc(heldBtc)),
+  updateBtcInputTerm: input => dispatch(updateBtcInputTerm(input)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PriceInfo);
