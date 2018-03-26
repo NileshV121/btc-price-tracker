@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { GET_API_ACTION } from '../api/apiActions';
+import { GET_API_ACTION } from '../actions/api-actions';
 import { getApiCall } from '../api/api';
 
 function manageResponse(response) {

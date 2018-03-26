@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBtcPriceAction } from '../actions/fetchBtcPrice';
-import { updateDefaultCurrency } from '../actions/updateBtcInfo';
-import { calcualteBtc} from '../actions/calculateBtc';
+import { fetchBtcPriceAction } from '../actions/fetch-btc-price';
+import { updateDefaultCurrency } from '../actions/update-btc-info';
+import { calcualteBtc} from '../actions/calculate-btc';
 
 class PriceInfo extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class PriceInfo extends Component {
             Name:
             <input type="text" name="amount" value={this.state.amount} onChange={this.handleInputChange} />
           </label>
-          <label for="firstname">Currency:
+          <label htmlFor="firstname">Currency:
             <select value={this.state.currency} onChange={this.handleCurrencyChange}>
               {
                 this.props.currencies.map( (value, index) =>

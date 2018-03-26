@@ -1,4 +1,4 @@
-import { getApiAction } from '../api/apiActions';
+import { getApiAction } from './api-actions';
 
 export const GET_BTC_PRICE = "GET_BTC_PRICE";
 export const GET_BTC_PRICE_SUCCESS = "GET_BTC_PRICE_SUCCESS";

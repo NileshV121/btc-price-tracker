@@ -1,5 +1,5 @@
 import { put, takeEvery, select } from 'redux-saga/effects';
-import { GET_BTC_PRICE_SUCCESS } from './fetchBtcPrice';
+import { GET_BTC_PRICE_SUCCESS } from './fetch-btc-price';
 
 export const UPDATE_BTC_PRICE = "UPDATE_BTC_PRICE";
 export const UPDATE_BTC_CURRENCIES = "UPDATE_BTC_CURRENCIES";

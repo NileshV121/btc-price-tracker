@@ -1,7 +1,7 @@
 import { fork } from 'redux-saga/effects';
-import { sagaMiddleware } from '../store/store';
-import { watchGetApi } from './apiSaga';
-import { watchGetBtcPriceApi, watchUpdateDefaultCurrency } from '../actions/updateBtcInfo';
+import { sagaMiddleware } from '../store';
+import { watchGetApi } from './api-saga';
+import { watchGetBtcPriceApi, watchUpdateDefaultCurrency } from '../actions/update-btc-info';
 
 function* root() {
   yield fork(watchGetApi);

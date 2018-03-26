@@ -1,4 +1,4 @@
-import { UPDATE_BTC_PRICE, UPDATE_BTC_CURRENCIES, UPDATE_DEFAULT_CURRENCY } from '../actions/updateBtcInfo';
+import { UPDATE_BTC_PRICE, UPDATE_BTC_CURRENCIES, UPDATE_DEFAULT_CURRENCY } from '../actions/update-btc-info';
 
 const initialState = {
   currentBtcPrice: '',

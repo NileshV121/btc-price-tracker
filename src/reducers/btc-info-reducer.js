@@ -2,7 +2,7 @@ import {
   GET_BTC_PRICE,
   GET_BTC_PRICE_SUCCESS,
   GET_BTC_PRICE_FAILURE,
-} from '../actions/fetchBtcPrice';
+} from '../actions/fetch-btc-price';
 
 const initialState = {
   isGettingBtcPrice: false,
