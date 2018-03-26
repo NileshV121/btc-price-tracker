@@ -8,7 +8,8 @@ class PriceInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount: ''
+      amount: '',
+      btcCalculated: ''
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -25,6 +26,7 @@ class PriceInfo extends Component {
   }
 
   handleSubmit(event) {
+    // this.setState({btcCalculated: this.state.amount/this.props.currentBtcPrice})
     this.props.calcualteBtc({ currency: this.props.defaultCurrency, amount: this.state.amount})
     event.preventDefault();
   }
@@ -45,18 +47,23 @@ class PriceInfo extends Component {
         <div>
           <span>Default Currency: {this.props.defaultCurrency}</span>
         </div>
+        <div>
+          <span>Calcualted Btc Price: {this.state.btcCalculated}</span>
+        </div>
         <form onSubmit={this.handleSubmit}>
           <label>
             Name:
             <input type="text" name="amount" value={this.state.amount} onChange={this.handleInputChange} />
           </label>
-          <select value={this.state.currency} onChange={this.handleCurrencyChange}>
-            {
-              this.props.currencies.map( (value, index) =>
-                <option key={index} value={value}>{value}</option>
-              )
-            }
-          </select>
+          <label for="firstname">Currency:
+            <select value={this.state.currency} onChange={this.handleCurrencyChange}>
+              {
+                this.props.currencies.map( (value, index) =>
+                  <option key={index} value={value}>{value}</option>
+                )
+              }
+            </select>
+          </label>
           <input type="button" onClick={this.handleSubmit} value="check" />
         </form>
       </div>
