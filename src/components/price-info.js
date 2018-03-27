@@ -33,33 +33,45 @@ class PriceInfo extends Component {
 
     return (
       <div>
-        <div>
-          <span>Current Btc Price: {currentBtcPrice}</span>
+        <div className="demo">
+          <div className="price">
+            <p>Current Btc Price</p>
+            <p>{currentBtcPrice}</p>
+          </div>
+          <div className="price">
+            <p>Currency</p>
+            <p>
+              <div className="form">
+                <select onChange={e => updateSelectedCurrency(e.target.value)}>
+                  {
+                    currencies.map((value, index) =>
+                      <option key={index} value={value}>{value}</option>
+                    )
+                  }
+                </select>
+              </div>
+            </p>
+          </div>
+          <div className="price">
+            <p>BTC Portfolio Value</p>
+            <p>{calculatedBtcPrice}</p>
+          </div>
         </div>
-        <div>
-          <span>Default Currency: {selectedCurrency}</span>
-        </div>
-        <div>
-          <span>Calcualted Btc Price: {calculatedBtcPrice}</span>
-        </div>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="amount">
-            Name:
+        <div className="form">
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="amount">
+              BTC You Hold
+            </label>
             <input
-              type="text"
-              name="amount"
-              value={inputTerm}
-              onChange={e => updateBtcInputTerm(e.target.value)}
+                type="text"
+                name="amount"
+                value={inputTerm}
+                onChange={e => updateBtcInputTerm(e.target.value)}
             />
-          </label>
-          <label htmlFor="currency">Currency:
-            <select onChange={e => updateSelectedCurrency(e.target.value)}>
-              {currencies.map((value, index) =>
-                <option key={index} value={value}>{value}</option>)}
-            </select>
-          </label>
-          <input type="button" onClick={() => calcualteBtc(inputTerm)} value="check" />
-        </form>
+            <br/>
+            <input type="button" onClick={() => calcualteBtc(inputTerm)} value="check" />
+          </form>
+        </div>
       </div>
     );
   }
