@@ -7,7 +7,6 @@ import {
 
 export const initialState = {
   isLoading: false,
-  info: {},
 };
 
 export const btcInfo = (state = initialState, action) => {
@@ -22,7 +21,7 @@ export const btcInfo = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        info: action.data,
+        ...action.data,
       };
 
     case GET_BTC_PRICE_FAILURE:

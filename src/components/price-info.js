@@ -4,6 +4,15 @@ import { connect } from 'react-redux';
 import { fetchBtcPriceAction } from '../actions/btc-api';
 import { updateSelectedCurrency, calcualteBtc, updateBtcInputTerm } from '../actions/btc-info';
 
+import {
+  getCalculatedBtcPrice,
+  getCurrencies,
+  getCurrentBtcPrice,
+  getInputTerm,
+  getSelectedCurrency,  
+} from '../selectors/btc-price';
+import { getBtcPriceInfo } from '../selectors/btc-info';
+
 class PriceInfo extends Component {
 
   componentDidMount() {
@@ -61,12 +70,12 @@ class PriceInfo extends Component {
 }
 
 const mapStateToProps = state => ({
-  btcPriceInfo: state.btcInfo.info,
-  currentBtcPrice: state.btcPrice.currentBtcPrice,
-  calculatedBtcPrice: state.btcPrice.calculatedBtcPrice,
-  currencies: state.btcPrice.currencies,
-  selectedCurrency: state.btcPrice.selectedCurrency,
-  inputTerm: state.btcPrice.inputTerm,
+  btcPriceInfo: getBtcPriceInfo(state),
+  currentBtcPrice: getCurrentBtcPrice(state),
+  calculatedBtcPrice: getCalculatedBtcPrice(state),
+  currencies: getCurrencies(state),
+  selectedCurrency: getSelectedCurrency(state),
+  inputTerm: getInputTerm(state),
 });
 
 const mapDispatchToProps = dispatch => ({

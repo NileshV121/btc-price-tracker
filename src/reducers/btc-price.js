@@ -1,7 +1,7 @@
 import {
   UPDATE_BTC_PRICE,
   UPDATE_BTC_CURRENCIES,
-  UPDATE_DEFAULT_CURRENCY,
+  UPDATE_SELECTED_CURRENCY,
   UPDATE_CALCULATED_BTC_PRICE,
   UPDATE_BTC_INPUT_TERM,
 } from '../actions/btc-info';
@@ -28,7 +28,7 @@ export const btcPrice = (state = initialState, action) => {
         currencies: action.currencies,
       };
 
-    case UPDATE_DEFAULT_CURRENCY:
+    case UPDATE_SELECTED_CURRENCY:
       return {
         ...state,
         selectedCurrency: action.currency,

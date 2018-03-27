@@ -1,7 +1,7 @@
 
 export const UPDATE_BTC_PRICE = "UPDATE_BTC_PRICE";
 export const UPDATE_BTC_CURRENCIES = "UPDATE_BTC_CURRENCIES";
-export const UPDATE_DEFAULT_CURRENCY = "UPDATE_DEFAULT_CURRENCY";
+export const UPDATE_SELECTED_CURRENCY = "UPDATE_SELECTED_CURRENCY";
 
 export const CALCULATE_BTC = 'CALCULATE_BTC';
 export const UPDATE_CALCULATED_BTC_PRICE = 'UPDATE_CALCULATED_BTC_PRICE';
@@ -20,7 +20,7 @@ export const updateCurrencies = currencies => ({
 });
 
 export const updateSelectedCurrency = currency => ({
-  type: UPDATE_DEFAULT_CURRENCY,
+  type: UPDATE_SELECTED_CURRENCY,
   currency
 });
 
