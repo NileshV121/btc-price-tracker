@@ -20,9 +20,9 @@ function* getApi(action) {
   const data = yield call(manageResponse, response);
 
   // notify api call success.
-  yield put({ type: action.types[1], data});
+  yield put({ type: action.types[1], data });
 }
 
-export function* watchGetApi() {
+export default function* watchGetApi() {
   yield takeEvery(GET_API_ACTION, getApi);
 }

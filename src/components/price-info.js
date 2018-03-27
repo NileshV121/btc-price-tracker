@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { fetchBtcPriceAction } from '../actions/btc-api';
@@ -9,17 +10,13 @@ import {
   getCurrencies,
   getCurrentBtcPrice,
   getInputTerm,
-  getSelectedCurrency,  
+  getSelectedCurrency,
 } from '../selectors/btc-price';
-import { getBtcPriceInfo } from '../selectors/btc-info';
 
 class PriceInfo extends Component {
-
   componentDidMount() {
     this.props.fetchBtcPrice();
-    this.timerID = setInterval(
-      () => this.props.fetchBtcPrice(), 10000
-    );
+    this.timerID = setInterval(() => this.props.fetchBtcPrice(), 10000);
   }
 
   render() {
@@ -46,7 +43,7 @@ class PriceInfo extends Component {
           <span>Calcualted Btc Price: {calculatedBtcPrice}</span>
         </div>
         <form onSubmit={this.handleSubmit}>
-          <label>
+          <label htmlFor="amount">
             Name:
             <input
               type="text"
@@ -55,22 +52,32 @@ class PriceInfo extends Component {
               onChange={e => updateBtcInputTerm(e.target.value)}
             />
           </label>
-          <label htmlFor="firstname">Currency:
+          <label htmlFor="currency">Currency:
             <select onChange={e => updateSelectedCurrency(e.target.value)}>
               {currencies.map((value, index) =>
-                <option key={index} value={value}>{value}</option>
-              )}
+                <option key={index} value={value}>{value}</option>)}
             </select>
           </label>
           <input type="button" onClick={() => calcualteBtc(inputTerm)} value="check" />
         </form>
       </div>
-    )
+    );
   }
 }
 
+PriceInfo.propTypes = {
+  currentBtcPrice: PropTypes.number,
+  calculatedBtcPrice: PropTypes.number,
+  currencies: PropTypes.array,
+  selectedCurrency: PropTypes.string,
+  inputTerm: PropTypes.string,
+  fetchBtcPrice: PropTypes.func,
+  updateSelectedCurrency: PropTypes.func,
+  calcualteBtc: PropTypes.func,
+  updateBtcInputTerm: PropTypes.func,
+};
+
 const mapStateToProps = state => ({
-  btcPriceInfo: getBtcPriceInfo(state),
   currentBtcPrice: getCurrentBtcPrice(state),
   calculatedBtcPrice: getCalculatedBtcPrice(state),
   currencies: getCurrencies(state),

@@ -1,10 +1,10 @@
 
 const getHeaders = () => ({
-  'Accept': 'application/json',
+  Accept: 'application/json',
   'Content-Type': 'application/json',
 });
 
-const statusHelper = response => {
+const statusHelper = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response);
   }
@@ -15,7 +15,7 @@ export const apiCall = (url, method, body) => (
   fetch(`${url}`, {
     method,
     headers: getHeaders(),
-    body: body,
+    body,
     mode: 'cors',
   })
     .then(statusHelper)

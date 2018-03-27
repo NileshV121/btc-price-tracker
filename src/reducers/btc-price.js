@@ -7,7 +7,7 @@ import {
 } from '../actions/btc-info';
 
 export const initialState = {
-  currentBtcPrice: '',
+  currentBtcPrice: 0,
   currencies: [],
   selectedCurrency: 'USD',
   inputTerm: '',
@@ -38,13 +38,13 @@ export const btcPrice = (state = initialState, action) => {
       return {
         ...state,
         calculatedBtcPrice: action.calculatedBtcPrice,
-      }
+      };
 
     case UPDATE_BTC_INPUT_TERM:
       return {
         ...state,
         inputTerm: action.inputTerm,
-      }
+      };
     default:
       return state;
   }

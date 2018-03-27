@@ -1,21 +1,21 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 import { getBtcPriceInfo } from './btc-info';
 
 export const getBtcPrice = state => state.btcPrice;
 
 export const getCurrentBtcPrice = createSelector(
   getBtcPrice,
-  btcPrice => btcPrice.currentBtcPrice
+  btcPrice => btcPrice.currentBtcPrice,
 );
 
 export const getSelectedCurrency = createSelector(
   getBtcPrice,
-  btcPrice => btcPrice.selectedCurrency
+  btcPrice => btcPrice.selectedCurrency,
 );
 
 export const getCalculatedBtcPrice = createSelector(
   getBtcPrice,
-  btcPrice => btcPrice.calculatedBtcPrice
+  btcPrice => btcPrice.calculatedBtcPrice,
 );
 
 export const getCurrentPriceBySelectedCurrency = createSelector(
@@ -25,10 +25,10 @@ export const getCurrentPriceBySelectedCurrency = createSelector(
 
 export const getCurrencies = createSelector(
   getBtcPrice,
-  btcPrice => btcPrice.currencies
+  btcPrice => btcPrice.currencies,
 );
 
 export const getInputTerm = createSelector(
   getBtcPrice,
-  btcPrice => btcPrice.inputTerm
+  btcPrice => btcPrice.inputTerm,
 );

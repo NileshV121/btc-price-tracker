@@ -16,18 +16,18 @@ import {
 } from '../selectors/btc-price';
 
 
-function* updateBtcInfo(action){
+function* updateBtcInfo(action) {
   const selectedCurrency = yield select(getSelectedCurrency);
   yield put(updatePrice(action.data[selectedCurrency].last));
   yield put(updateCurrencies(Object.keys(action.data)));
 }
 
-function* updateBtcPrice(){
+function* updateBtcPrice() {
   const btcPrice = yield select(getCurrentPriceBySelectedCurrency);
   yield put(updatePrice(btcPrice));
 }
 
-function* calcualteBtc(action){
+function* calcualteBtc(action) {
   const currentBtcPrice = yield select(getCurrentBtcPrice);
   yield put(updateCalculatedBtcPrice(action.heldBtc * currentBtcPrice));
 }
@@ -42,5 +42,5 @@ export function* watchUpdateSelectedCurrency() {
 }
 
 export function* watchCalcualteBtc() {
-  yield takeEvery(CALCULATE_BTC, calcualteBtc)
+  yield takeEvery(CALCULATE_BTC, calcualteBtc);
 }

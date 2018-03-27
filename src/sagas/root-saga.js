@@ -1,7 +1,7 @@
 import { fork } from 'redux-saga/effects';
 
 import { sagaMiddleware } from '../store';
-import { watchGetApi } from './api-saga';
+import watchGetApi from './api-saga';
 import {
   watchGetBtcPriceApi,
   watchUpdateSelectedCurrency,

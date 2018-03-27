@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 
 import AppBar from '../components/app-bar';
@@ -15,6 +16,10 @@ const MainContainer = props => (
     </div>
   </Provider>
 );
+
+MainContainer.propTypes = {
+  children: PropTypes.element,
+};
 
 
 export default MainContainer;
